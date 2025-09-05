@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F3F3F3; /* Light gray background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            color: #217346; /* Excel Green */
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .captcha-image {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 100%;
+            border: 3px solid #217346; /* Excel Green border */
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #217346; /* Excel Green on focus */
+        }
+
+        button {
+            background-color: #217346; /* Excel Green background */
+            color: white;
+            font-size: 16px;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1B5E3B; /* Darker shade of Excel Green on hover */
+        }
+
+        .error-message {
+            color: #D83B01; /* Excel Error Red */
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter the CAPTCHA Code</h2>
+
+        <!-- Display CAPTCHA image -->
+        <img class="captcha-image" src="data:image/png;base64,{{ captcha_image }}" alt="CAPTCHA Image">
+
+        <form method="POST" action="/">
+            <label for="code">Captcha Code:</label>
+            <input type="text" id="code" name="code" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if error %}
+            <p class="error-message">{{ message }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
